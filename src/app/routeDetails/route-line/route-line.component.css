@@ -1,0 +1,273 @@
+:host {
+  --component-marginX: 100px;
+  --component-bg: white;
+  --city-width: 30px;
+  --city-border-width: 2px;
+  --city-border-topbottom: calc((var(--stop-height) - var(--city-border-width)) / 2);
+  --stop-list-start: calc(var(--city-width) + 5px);
+  --stop-height: 66px;
+  --stop-circle-border: 3px;
+  --stop-circle-diameter: 50.9px;
+  --stop-circle-radius: calc(var(--stop-circle-diameter) / 2);
+  --stop-axis-length: calc(var(--stop-height) - var(--stop-circle-diameter));
+  --stop-main-color: #192638;
+  --stop-notactive-color: #808285;
+}
+
+:host, .component-root {
+  height: 100%;
+}
+
+.component-root {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+ display: flex;
+  min-height: 0;
+}
+
+.stops-axis {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.cities-list {
+  min-height: 0;
+  overflow: auto;
+}
+
+/* override default ul style */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* title */
+.axis-title {
+  font-size: 36.9px;
+  font-weight: bold;
+  color: black;
+}
+
+.axis-title,
+.stops-axis {
+  padding-left: var(--component-marginX);
+}
+
+.stops-axis {
+  padding-left: var(--component-marginX);
+   flex-grow: 1;
+}
+
+:host-context(.right-lang) .axis-title,
+:host-context(.right-lang) .stops-axis {
+  padding-right: var(--component-marginX);
+  padding-left: unset;
+}
+
+.content {
+  position: relative;
+}
+
+.stops-axis {
+  position: relative;
+}
+
+.city {
+  position: relative;
+}
+
+.city-name-wrapper {
+  position: absolute;
+  width: var(--city-width);
+  display: flex;
+  height: 100%;
+}
+
+.city-name-border {
+  color: var(--stop-main-color);
+  box-sizing: border-box;
+  width: inherit;
+  border: solid var(--city-border-width);
+  border-right-style: none;
+  display: flex;
+  justify-content: center;
+  margin: var(--city-border-topbottom) 0;
+}
+
+:host-context(.right-lang) .city-name-border {
+  border-right-style: solid;
+  border-left-style: none;
+}
+
+.city-name {
+  --transformX: calc(var(--city-width) / -2);
+  writing-mode: vertical-rl;
+  position: relative;
+  align-self: center;
+  white-space: nowrap;
+  padding: 10px 0;
+  background-color: var(--component-bg);
+  left: var(--transformX);
+  font-size: 24px;
+}
+
+:host-context(.right-lang) .city-name {
+  left: unset;
+  right: var(--transformX);
+  transform: rotate(180deg);
+}
+
+.stop-list {
+  margin-left: var(--stop-list-start);
+}
+
+:host-context(.right-lang) .stop-list {
+  margin-left: unset;
+  margin-right: var(--stop-list-start);
+}
+
+.stop {
+  position: relative;
+  height: var(--stop-height);
+  color: var(--stop-main-color);
+}
+
+  .stop.not-active {
+    color: var(--stop-notactive-color);
+  }
+
+.stop-inner {
+  display: flex;
+  align-items: center;
+  height: inherit;
+}
+
+.stop-circle {
+  border: solid var(--stop-circle-border);
+  box-sizing: border-box;
+  height: var(--stop-circle-diameter);
+  width: var(--stop-circle-diameter);
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32.9px;
+}
+
+.stop::after {
+  --width: 7.9px;
+  --transofrmX: calc(var(--stop-circle-radius) - var(--width) / 2);
+  content: '';
+  position: absolute;
+  top: calc(50% + var(--stop-circle-radius));
+  left: var(--transofrmX);
+  height: var(--stop-axis-length);
+  border-left: solid var(--width);
+  box-sizing: border-box;
+}
+
+:host-context(.right-lang) .stop::after {
+  left: unset;
+  right: var(--transofrmX);
+}
+
+.stop.selected::after {
+  color: var(--stop-notactive-color);
+}
+
+.arrow-down-wrapper {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--component-bg);
+}
+
+.arrow-down {
+  --width: 38px;
+  --transformX: calc(var(--stop-list-start) + var(--stop-circle-radius) - var(--width) / 2);
+  margin-left: var(--transformX);
+}
+
+:host-context(.right-lang) .arrow-down {
+  margin-right: var(--transformX);
+}
+
+.stop-name {
+  --marginX: 23.6px;
+  margin-left: var(--marginX);
+  font-size: 34px;
+}
+
+:host-context(.right-lang) .stop-name {
+  margin-left: unset;
+  margin-right: var(--marginX);
+}
+
+/*
+  departure stop label
+*/
+.departure-label-wrapper {
+  --width: 48px;
+  --arrow-width: 10px;
+  --transformX: calc(-10px - var(--width) - var(--stop-list-start) - var(--arrow-width));
+  position: absolute;
+  height: 400%;
+  width: var(--width);
+  top: -150%;
+  left: var(--transformX);
+  display: flex;
+}
+
+:host-context(.right-lang) .departure-label-wrapper {
+  left: unset;
+  right: var(--transformX);
+  transform: rotate(180deg);
+}
+
+.departure-label {
+  --color: red;
+  background-color: var(--color);
+  color: white;
+  writing-mode: vertical-rl;
+  display: flex;
+  align-self: center;
+  padding: 14px 0;
+  white-space: nowrap;
+  border-radius: 5px;
+  font-size: 24px;
+}
+
+  .departure-label::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: calc(0px - var(--arrow-width));
+    border-width: var(--arrow-width);
+    border-style: solid;
+    border-color: transparent transparent transparent var(--color);
+  }
+
+/* selected-stop-details */
+.selected-stop-details {
+  --marginX: 60px;
+  position: absolute;
+  top: 5px;
+  right: var(--marginX);
+  width: 112.5px;
+  height: 354.3px;
+  object-fit: contain;
+  border-radius: 15.2px;
+  background-color: #ffffff;
+}
+
+:host-context(.right-lang) .selected-stop-details {
+  right: unset;
+  left: var(--marginX);
+}

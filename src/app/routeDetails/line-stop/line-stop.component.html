@@ -1,0 +1,7 @@
+<div class="stop-title">{{'stop' | translate}} {{getTranslationsByLang(model.stop)}}</div>
+<div class="arrival-time">{{'lineStop.arrivalTime' | translate}} {{model.lineStop.arrivalTime}}</div>
+<div class="hr"></div>
+<div class="linesTitle" [translate]="'lineStop.otherLines'"></div>
+<div class="allLines">
+  <span class="line" *ngFor="let r of model.lineStop.routes">{{r}} </span>
+</div>

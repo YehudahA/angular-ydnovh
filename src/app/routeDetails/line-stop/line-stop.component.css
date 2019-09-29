@@ -1,0 +1,52 @@
+
+.stop-title {
+  font-size: 34px;
+  text-align: center;
+  color: #192638;
+  font-family: OpenSansHebrew;
+  font-weight: bold;
+  height: 60px;
+  overflow: scroll;
+}
+
+.arrival-time {
+  font-size: 34px;
+  line-height: 1.67;
+  text-align: center;
+  color: #192638;
+}
+
+.linesTitle {
+  font-size: 34px;
+  font-weight: bold;
+  line-height: 1.67;
+  text-align: center;
+  color: #192638;
+  margin-bottom: 35px;
+}
+
+.allLines {
+  display: grid;
+  grid-template-columns: repeat(5,14%);
+  gap: 17.3px 8.8px;
+  justify-content: center;
+  height: 92.1px;
+  overflow: scroll;
+}
+
+.line {
+  width: 43.3px;
+  height: 37.4px;
+  background-color: #192638;
+  font-size: 25.2px;
+  letter-spacing: -1.51px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.hr {
+  width: 271.1px;
+  height: 1px;
+  background-color: #192638;
+  margin: 15px auto;
+}

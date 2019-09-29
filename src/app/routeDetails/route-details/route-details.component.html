@@ -1,0 +1,37 @@
+<div class="component-root" *ngIf="route && myAgency" [ngClass]="currentLang">
+  <div id="title">
+    <app-go-back></app-go-back>
+
+    <div id="dataTitle">
+      <span>{{'lineDetails.title' | translate}} </span>
+      <div id="lineName" [ngStyle]="{'background-color': myAgency.color}">
+        <span>{{route.shortName}}</span>
+        <img [src]="'../../../assets/images/agencies/'+ myAgency.logo" />
+      </div>
+      <span class="destination">{{getDestinationLang()}}</span>
+    </div>
+
+  </div>
+
+  <div id="nextBusTimeAndLink">
+    <div id="nextBusTime">
+      <span>{{'lineDetails.nextBux' | translate}} </span>
+      <span> {{arrivalTimeSeconds | while | translate}} </span>
+      <span> {{arrivalTimeSeconds | arrivalTime}} </span>
+      <span> {{arrivalTimeSeconds | minutes | translate}} </span>
+    </div>
+    <div *ngIf="route">
+      <a *ngIf="activeUrl == 'frequencies'" routerLink="/{{0|deviceId}}/route/{{route.id}}/line">
+        <img src="../../../assets/images/tahanot_{{currentLang}}.png" />
+      </a>
+      <a *ngIf="activeUrl == 'line'" routerLink="/{{0|deviceId}}/route/{{route.id}}/frequencies">
+        <img src="../../../assets/images/loz_{{currentLang}}.png" />
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<div class="router-target">
+  <router-outlet></router-outlet>
+</div>

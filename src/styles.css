@@ -1,0 +1,26 @@
+
+body {
+  background-color: unset;
+  text-align: right;
+  direction: rtl;
+  font-family: OpenSansHebrew;
+}
+
+html {
+  overflow: hidden;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.right-lang .lang-dir-aware {
+  text-align: right;
+  direction: rtl;
+}
+
+.left-lang .lang-dir-aware {
+  text-align: left;
+  direction: ltr;
+}
