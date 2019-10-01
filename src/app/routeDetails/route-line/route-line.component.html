@@ -1,57 +1,53 @@
 <div class="component-root lang-dir-aware">
 
-  <h3 class="axis-title" [translate]="'routeLine.title'"></h3>
+	<h3 class="axis-title" [translate]="'routeLine.title'"></h3>
 
-  <section class="content">
-    <section class="stops-axis">
+	<section class="content">
+		<section class="stops-axis">
 
-      <ul *ngIf="line" class="cities-list">
+			<ul *ngIf="line" class="cities-list" #citiesList>
 
-        <li *ngFor="let city of line.cities" class="city">
+				<li *ngFor="let city of line.cities" class="city">
 
-          <div class="city-name-wrapper">
-            <div class="city-name-border">
-              <div class="city-name">{{city.name}}</div>
-            </div>
-          </div>
+					<div class="city-name-wrapper">
+						<div class="city-name-border">
+							<div class="city-name">{{city.name}}</div>
+						</div>
+					</div>
 
-          <ul class="stop-list">
+					<ul class="stop-list">
 
-            <li *ngFor="let s of city.stops" class="stop"
-                (click)="selectStop(s)"
-                [class.not-active]="s.stop.stopSequence < line.departureStop || s.stop.stopSequence > selectedStop"
-                [class.selected]="s.stop.stopSequence == selectedStop">
+						<li *ngFor="let s of city.stops" class="stop" (click)="selectStop(s)" [class.not-active]="s.stop.stopSequence < line.departureStop || s.stop.stopSequence > selectedStop"
+						 [class.selected]="s.stop.stopSequence == selectedStop">
 
-              <div *ngIf="s.isDefaultStop || s.isDepartureStop" class="departure-label-wrapper">
-                <div class="departure-label">{{(s.isDepartureStop ? 'IHere' : 'routeLine.departureStop') | translate}}</div>
-              </div>
+							<div *ngIf="s.isDefaultStop || s.isDepartureStop" class="departure-label-wrapper">
+								<div class="departure-label">{{(s.isDepartureStop ? 'IHere' : 'routeLine.departureStop') | translate}}</div>
+							</div>
 
-              <div class="stop-inner">
-                <div class="stop-circle">{{s.stop.stopSequence}}</div>
-                <div class="stop-name">{{getTranslationsByLang(s)}}</div>
-              </div>
-            </li>
+							<div class="stop-inner">
+								<div class="stop-circle">{{s.stop.stopSequence}}</div>
+								<div class="stop-name">{{getTranslationsByLang(s)}}</div>
+							</div>
+						</li>
 
-          </ul>
+					</ul>
 
-        </li>
+				</li>
 
-      </ul>
+			</ul>
 
-      <div class="arrow-down-wrapper">
-        <h1>ArrowDown</h1>
-      </div>
-    </section>
+			<div class="arrow-down" (click)="scroll()">
+			</div>
+		</section>
 
-    <section class="selected-stop-details">
-      <app-line-stop *ngIf="lineStop$ | async as lineStop; else noselected"
-                     [model]="lineStop"></app-line-stop>
-    </section>
+		<section class="selected-stop-details">
+			<app-line-stop *ngIf="lineStop$ | async as lineStop; else noselected" [model]="lineStop"></app-line-stop>
+		</section>
 
-  </section>
+	</section>
 
 </div>
 
 <ng-template #noselected>
-  <p [translate]="'routeLine.noStopSelected'"></p>
+	<p class="select-dest" [translate]="'routeLine.noStopSelected'"></p>
 </ng-template>
